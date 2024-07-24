@@ -107,11 +107,13 @@ class _DesktopScreenState extends State<DesktopScreen> with TickerProviderStateM
 
     _fadeAnimation = TweenSequence<double>([
       TweenSequenceItem(
-        tween: Tween<double>(begin: 0.0, end: 0.2).chain(CurveTween(curve: const Interval(0.0, 0.2, curve: Curves.easeIn))),
+        tween: Tween<double>(begin: 0.0, end: 0.2)
+            .chain(CurveTween(curve: const Interval(0.0, 0.2, curve: Curves.easeIn))),
         weight: 20,
       ),
       TweenSequenceItem(
-        tween: Tween<double>(begin: 0.2, end: 1.0).chain(CurveTween(curve: const Interval(0.3, 1.0, curve: Curves.easeOut))),
+        tween: Tween<double>(begin: 0.2, end: 1.0)
+            .chain(CurveTween(curve: const Interval(0.3, 1.0, curve: Curves.easeOut))),
         weight: 80,
       ),
     ]).animate(_animationController);
@@ -210,11 +212,15 @@ class _DesktopScreenState extends State<DesktopScreen> with TickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    if (_backgroundImage == null || _pcImage == null || _homeButtonImage == null || _backButtonImage == null || _recentButtonImage == null) {
-      return Center(child: SizedBox(
+    if (_backgroundImage == null ||
+        _pcImage == null ||
+        _homeButtonImage == null ||
+        _backButtonImage == null ||
+        _recentButtonImage == null) {
+      return Center(
+          child: SizedBox(
         height: 500,
-        child: Lottie.asset('assets/lottie/loading.json',
-                          fit: BoxFit.contain),
+        child: Lottie.asset('assets/lottie/loading.json', fit: BoxFit.contain),
       ));
     }
 
@@ -388,14 +394,20 @@ class _DesktopScreenState extends State<DesktopScreen> with TickerProviderStateM
                                       child: Ink(
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(30),
-                                          color: changeBackgroundTabCheck[0] ? const Color(0xffB7E4FC) : Colors.transparent,
+                                          color: changeBackgroundTabCheck[0]
+                                              ? const Color(0xffB7E4FC)
+                                              : Colors.transparent,
                                         ),
                                         height: 30,
                                         width: 60,
                                         child: Center(
                                           child: Text(
                                             "명조",
-                                            style: TextStyle(color: changeBackgroundTabCheck[0] ? Colors.black : Colors.white, fontWeight: FontWeight.bold),
+                                            style: TextStyle(
+                                                color: changeBackgroundTabCheck[0]
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontWeight: FontWeight.bold),
                                           ),
                                         ),
                                       ),
@@ -415,14 +427,20 @@ class _DesktopScreenState extends State<DesktopScreen> with TickerProviderStateM
                                       child: Ink(
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(30),
-                                          color: changeBackgroundTabCheck[1] ? const Color(0xffB7E4FC) : Colors.transparent,
+                                          color: changeBackgroundTabCheck[1]
+                                              ? const Color(0xffB7E4FC)
+                                              : Colors.transparent,
                                         ),
                                         height: 30,
                                         width: 110,
                                         child: Center(
                                           child: Text(
                                             "블루 아카이브",
-                                            style: TextStyle(color: changeBackgroundTabCheck[1] ? Colors.black : Colors.white, fontWeight: FontWeight.bold),
+                                            style: TextStyle(
+                                                color: changeBackgroundTabCheck[1]
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontWeight: FontWeight.bold),
                                           ),
                                         ),
                                       ),
@@ -442,14 +460,20 @@ class _DesktopScreenState extends State<DesktopScreen> with TickerProviderStateM
                                       child: Ink(
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.circular(30),
-                                          color: changeBackgroundTabCheck[2] ? const Color(0xffB7E4FC) : Colors.transparent,
+                                          color: changeBackgroundTabCheck[2]
+                                              ? const Color(0xffB7E4FC)
+                                              : Colors.transparent,
                                         ),
                                         height: 30,
                                         width: 80,
                                         child: Center(
                                           child: Text(
                                             "명일방주",
-                                            style: TextStyle(color: changeBackgroundTabCheck[2] ? Colors.black : Colors.white, fontWeight: FontWeight.bold),
+                                            style: TextStyle(
+                                                color: changeBackgroundTabCheck[2]
+                                                    ? Colors.black
+                                                    : Colors.white,
+                                                fontWeight: FontWeight.bold),
                                           ),
                                         ),
                                       ),
@@ -467,7 +491,8 @@ class _DesktopScreenState extends State<DesktopScreen> with TickerProviderStateM
                                 });
                                 _paddingController.reverse().then((_) {
                                   setState(() {
-                                    _isbackgroundImageChangeVisible = !_isbackgroundImageChangeVisible;
+                                    _isbackgroundImageChangeVisible =
+                                        !_isbackgroundImageChangeVisible;
                                   });
                                 });
                               },
@@ -479,69 +504,72 @@ class _DesktopScreenState extends State<DesktopScreen> with TickerProviderStateM
                             ),
                           ],
                         ),
-                        if(changeBackgroundTabCheck[0])
-                         Expanded(
-                          child: ImageList(
-                            selectedIndex: _wuntheringWaveSelectedImageIndex,
-                            imgType: "wutheringWaves",
-                            onImageSelected: (index) async {
-                              setState(() {
-                                _isImageChanging = true;
-                                _wuntheringWaveSelectedImageIndex = index;
-                                _blueArchiveWaveSelectedImageIndex = -1;
-                                _arkNightsWaveSelectedImageIndex = -1;
-                              });
+                        if (changeBackgroundTabCheck[0])
+                          Expanded(
+                            child: ImageList(
+                              selectedIndex: _wuntheringWaveSelectedImageIndex,
+                              imgType: "wutheringWaves",
+                              onImageSelected: (index) async {
+                                setState(() {
+                                  _isImageChanging = true;
+                                  _wuntheringWaveSelectedImageIndex = index;
+                                  _blueArchiveWaveSelectedImageIndex = -1;
+                                  _arkNightsWaveSelectedImageIndex = -1;
+                                });
 
-                              await _changeBackgroundImage("assets/img/wutheringWaves/${index + 1}.png");
+                                await _changeBackgroundImage(
+                                    "assets/img/wutheringWaves/${index + 1}.png");
 
-                              setState(() {
-                                _isImageChanging = false;
-                              });
-                            },
+                                setState(() {
+                                  _isImageChanging = false;
+                                });
+                              },
+                            ),
                           ),
-                        ),
-                        if(changeBackgroundTabCheck[1])
-                         Expanded(
-                          child: ImageList(
-                            selectedIndex: _blueArchiveWaveSelectedImageIndex,
-                            imgType: "blueArchive",
-                            onImageSelected: (index) async {
-                              setState(() {
-                                _isImageChanging = true;
-                                _blueArchiveWaveSelectedImageIndex = index;
-                                _wuntheringWaveSelectedImageIndex = -1;
-                                _arkNightsWaveSelectedImageIndex = -1;
-                              });
+                        if (changeBackgroundTabCheck[1])
+                          Expanded(
+                            child: ImageList(
+                              selectedIndex: _blueArchiveWaveSelectedImageIndex,
+                              imgType: "blueArchive",
+                              onImageSelected: (index) async {
+                                setState(() {
+                                  _isImageChanging = true;
+                                  _blueArchiveWaveSelectedImageIndex = index;
+                                  _wuntheringWaveSelectedImageIndex = -1;
+                                  _arkNightsWaveSelectedImageIndex = -1;
+                                });
 
-                              await _changeBackgroundImage("assets/img/blueArchive/${index + 1}.png");
+                                await _changeBackgroundImage(
+                                    "assets/img/blueArchive/${index + 1}.png");
 
-                              setState(() {
-                                _isImageChanging = false;
-                              });
-                            },
+                                setState(() {
+                                  _isImageChanging = false;
+                                });
+                              },
+                            ),
                           ),
-                        ),
-                      if(changeBackgroundTabCheck[2])
-                         Expanded(
-                          child: ImageList(
-                            selectedIndex: _arkNightsWaveSelectedImageIndex,
-                            imgType: "arkNights",
-                            onImageSelected: (index) async {
-                              setState(() {
-                                _isImageChanging = true;
-                                _arkNightsWaveSelectedImageIndex = index;
-                                _wuntheringWaveSelectedImageIndex = -1;
-                                _blueArchiveWaveSelectedImageIndex = -1;
-                              });
+                        if (changeBackgroundTabCheck[2])
+                          Expanded(
+                            child: ImageList(
+                              selectedIndex: _arkNightsWaveSelectedImageIndex,
+                              imgType: "arkNights",
+                              onImageSelected: (index) async {
+                                setState(() {
+                                  _isImageChanging = true;
+                                  _arkNightsWaveSelectedImageIndex = index;
+                                  _wuntheringWaveSelectedImageIndex = -1;
+                                  _blueArchiveWaveSelectedImageIndex = -1;
+                                });
 
-                              await _changeBackgroundImage("assets/img/arkNights/${index + 1}.png");
+                                await _changeBackgroundImage(
+                                    "assets/img/arkNights/${index + 1}.png");
 
-                              setState(() {
-                                _isImageChanging = false;
-                              });
-                            },
+                                setState(() {
+                                  _isImageChanging = false;
+                                });
+                              },
+                            ),
                           ),
-                        ),
                       ],
                     ),
                   ),
@@ -699,7 +727,7 @@ class _DesktopScreenState extends State<DesktopScreen> with TickerProviderStateM
                                         child: InkWell(
                                           onTap: () async {
                                             try {
-                                              await _launchUrl("https://github.com/Lovingcats");
+                                              await _launchUrl("https://github.com/Kirankapsee");
                                             } catch (e) {
                                               print('Error launching URL: $e');
                                             }
@@ -721,7 +749,8 @@ class _DesktopScreenState extends State<DesktopScreen> with TickerProviderStateM
                                         child: InkWell(
                                           onTap: () async {
                                             try {
-                                              await _launchUrl("https://lovely-cornucopia-0ba.notion.site/05f0c597d9ac487a9228f3fd172c196a?pvs=4");
+                                              await _launchUrl(
+                                                  "https://lovely-cornucopia-0ba.notion.site/05f0c597d9ac487a9228f3fd172c196a?pvs=4");
                                             } catch (e) {
                                               print('Error launching URL: $e');
                                             }
@@ -834,7 +863,9 @@ class ImageList extends StatelessWidget {
   final Function(int) onImageSelected;
   final String imgType;
 
-  const ImageList({Key? key, required this.selectedIndex, required this.imgType, required this.onImageSelected}) : super(key: key);
+  const ImageList(
+      {Key? key, required this.selectedIndex, required this.imgType, required this.onImageSelected})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
